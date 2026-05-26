@@ -1,0 +1,1277 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>서울과 지역 사이 — 예술인 익명 리서치</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;900&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&display=swap');
+
+:root {
+  --bg: #ede8df;
+  --paper: #f7f4ee;
+  --ink: #18150f;
+  --ink-mid: #4a4540;
+  --ink-light: #8a837a;
+  --rule: #cdc8be;
+  --red: #b8321a;
+  --blue: #1a3f6f;
+  --green: #1a5c3a;
+  --post-y: #fde98a;
+  --post-b: #b8d4f0;
+  --post-g: #a8dfc0;
+  --post-p: #dcc8f0;
+  --post-o: #f8c898;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  font-family: 'Noto Serif KR', serif;
+  color: var(--ink);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* grain overlay */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.page { display: none; min-height: 100vh; }
+.page.active { display: block; }
+
+.wrap {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 56px 28px 120px;
+}
+
+/* ── LANDING ── */
+#landing .wrap { padding-top: 80px; }
+
+.land-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 10.5px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+  margin-bottom: 20px;
+}
+
+.land-title {
+  font-size: clamp(32px, 7vw, 56px);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -.025em;
+  margin-bottom: 8px;
+}
+
+.land-title span { color: var(--red); }
+
+.land-sub {
+  font-size: clamp(14px, 2.5vw, 17px);
+  font-weight: 300;
+  line-height: 1.85;
+  color: var(--ink-mid);
+  max-width: 500px;
+  margin-bottom: 40px;
+  margin-top: 16px;
+}
+
+.anon-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: var(--ink);
+  color: var(--bg);
+  font-family: 'DM Mono', monospace;
+  font-size: 10.5px;
+  letter-spacing: .1em;
+  padding: 6px 14px;
+  margin-bottom: 56px;
+}
+
+.anon-tag::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #4cde80;
+  display: block;
+}
+
+.divider {
+  height: 1px;
+  background: var(--rule);
+  margin-bottom: 40px;
+}
+
+.who-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+  margin-bottom: 20px;
+}
+
+.who-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.who-btn {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 20px 22px;
+  border: 1.5px solid var(--rule);
+  background: var(--paper);
+  cursor: pointer;
+  transition: all .18s;
+  text-align: left;
+  width: 100%;
+}
+
+.who-btn:hover { border-color: var(--ink); background: white; transform: translateX(3px); }
+
+.who-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--ink-light);
+  padding-top: 2px;
+  min-width: 24px;
+}
+
+.who-text strong {
+  display: block;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 3px;
+  color: var(--ink);
+}
+
+.who-text span {
+  font-size: 13px;
+  color: var(--ink-light);
+  font-weight: 300;
+}
+
+.who-btn.a:hover { border-color: var(--green); }
+.who-btn.a:hover .who-num { color: var(--green); }
+.who-btn.b:hover { border-color: var(--red); }
+.who-btn.b:hover .who-num { color: var(--red); }
+.who-btn.c:hover { border-color: var(--blue); }
+.who-btn.c:hover .who-num { color: var(--blue); }
+
+/* ── SURVEY PAGES ── */
+.survey-header {
+  border-top: 2.5px solid var(--ink);
+  padding-top: 28px;
+  margin-bottom: 48px;
+}
+
+.survey-kicker {
+  font-family: 'DM Mono', monospace;
+  font-size: 10.5px;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.survey-kicker.green { color: var(--green); }
+.survey-kicker.red { color: var(--red); }
+.survey-kicker.blue { color: var(--blue); }
+
+.survey-title {
+  font-size: clamp(22px, 5vw, 34px);
+  font-weight: 900;
+  line-height: 1.2;
+  letter-spacing: -.02em;
+}
+
+.progress-wrap { margin-bottom: 44px; }
+
+.progress-track {
+  height: 2px;
+  background: var(--rule);
+  margin-bottom: 8px;
+}
+
+.progress-fill {
+  height: 100%;
+  transition: width .4s ease;
+}
+
+.progress-fill.green { background: var(--green); }
+.progress-fill.red { background: var(--red); }
+.progress-fill.blue { background: var(--blue); }
+
+.progress-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--ink-light);
+  letter-spacing: .1em;
+}
+
+/* 질문 블록 */
+.qblock {
+  margin-bottom: 36px;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  padding: 28px;
+  position: relative;
+  animation: fadeUp .3s ease both;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.qblock::before {
+  content: attr(data-q);
+  position: absolute;
+  top: -11px;
+  left: 20px;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .12em;
+  background: var(--ink);
+  color: var(--bg);
+  padding: 2px 8px;
+}
+
+.qblock.accent-green::before { background: var(--green); }
+.qblock.accent-red::before { background: var(--red); }
+.qblock.accent-blue::before { background: var(--blue); }
+
+.q-text {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.5;
+  margin-bottom: 6px;
+}
+
+.q-note {
+  font-size: 12px;
+  color: var(--ink-light);
+  font-weight: 300;
+  margin-bottom: 18px;
+  font-family: 'DM Mono', monospace;
+}
+
+/* 선택지 */
+.opts { display: flex; flex-wrap: wrap; gap: 8px; }
+
+.opt {
+  padding: 8px 15px;
+  border: 1.5px solid var(--rule);
+  background: white;
+  font-family: 'Noto Serif KR', serif;
+  font-size: 13.5px;
+  cursor: pointer;
+  transition: all .15s;
+  color: var(--ink);
+  line-height: 1.4;
+}
+
+.opt:hover { border-color: var(--ink-mid); background: var(--bg); }
+.opt.sel { border-color: var(--ink); background: var(--ink); color: var(--bg); }
+.opt.sel-green { border-color: var(--green); background: var(--green); color: white; }
+.opt.sel-red { border-color: var(--red); background: var(--red); color: white; }
+.opt.sel-blue { border-color: var(--blue); background: var(--blue); color: white; }
+
+/* 슬라이더 */
+.slider-body { padding: 4px 0 8px; }
+
+input[type=range] {
+  width: 100%;
+  -webkit-appearance: none;
+  height: 2px;
+  background: var(--rule);
+  outline: none;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+input[type=range].green { background: linear-gradient(to right, var(--green) var(--pct, 50%), var(--rule) var(--pct, 50%)); }
+input[type=range].red { background: linear-gradient(to right, var(--red) var(--pct, 50%), var(--rule) var(--pct, 50%)); }
+input[type=range].blue { background: linear-gradient(to right, var(--blue) var(--pct, 50%), var(--rule) var(--pct, 50%)); }
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px; height: 18px;
+  background: var(--ink);
+  border-radius: 0;
+  cursor: pointer;
+}
+
+.slider-ends {
+  display: flex;
+  justify-content: space-between;
+  font-family: 'DM Mono', monospace;
+  font-size: 10.5px;
+  color: var(--ink-light);
+}
+
+.slider-val {
+  text-align: center;
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  margin-top: 10px;
+  font-weight: 500;
+}
+
+/* 텍스트 입력 */
+textarea.txt {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1.5px solid var(--rule);
+  background: white;
+  font-family: 'Noto Serif KR', serif;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--ink);
+  resize: none;
+  outline: none;
+  transition: border-color .15s;
+}
+
+textarea.txt:focus { border-color: var(--ink-mid); }
+
+.char-row {
+  display: flex;
+  justify-content: flex-end;
+  font-family: 'DM Mono', monospace;
+  font-size: 10.5px;
+  color: var(--ink-light);
+  margin-top: 6px;
+}
+
+/* 파트 구분선 */
+.part-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10.5px;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+  border-top: 1px solid var(--rule);
+  padding-top: 12px;
+  margin: 40px 0 24px;
+}
+
+/* 파트6 선택 */
+.optional-intro {
+  background: var(--paper);
+  border: 1px dashed var(--rule);
+  padding: 20px 24px;
+  margin-bottom: 24px;
+}
+
+.optional-intro p {
+  font-size: 13.5px;
+  line-height: 1.75;
+  color: var(--ink-mid);
+  font-weight: 300;
+}
+
+.optional-intro strong {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: var(--ink);
+}
+
+/* 제출 */
+.submit-area {
+  border-top: 1px solid var(--rule);
+  padding-top: 40px;
+  text-align: center;
+}
+
+.btn-submit {
+  padding: 15px 50px;
+  font-family: 'Noto Serif KR', serif;
+  font-size: 15px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  letter-spacing: .06em;
+  transition: all .18s;
+}
+
+.btn-submit.green { background: var(--green); color: white; }
+.btn-submit.red { background: var(--red); color: white; }
+.btn-submit.blue { background: var(--blue); color: white; }
+.btn-submit:hover { opacity: .85; transform: translateY(-2px); }
+
+.submit-note {
+  margin-top: 12px;
+  font-family: 'DM Mono', monospace;
+  font-size: 10.5px;
+  color: var(--ink-light);
+  letter-spacing: .08em;
+}
+
+/* 완료 */
+#done .wrap { padding-top: 100px; text-align: center; }
+
+.done-mark {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: .15em;
+  color: var(--ink-light);
+  margin-bottom: 24px;
+}
+
+.done-title {
+  font-size: clamp(28px, 6vw, 44px);
+  font-weight: 900;
+  margin-bottom: 20px;
+  letter-spacing: -.02em;
+}
+
+.done-body {
+  font-size: 15px;
+  line-height: 1.9;
+  color: var(--ink-mid);
+  font-weight: 300;
+  max-width: 420px;
+  margin: 0 auto 48px;
+}
+
+/* 포스트잇 보드 */
+.board-header {
+  border-top: 2.5px solid var(--ink);
+  padding-top: 24px;
+  margin-bottom: 28px;
+}
+
+.board-header h2 {
+  font-size: 22px;
+  font-weight: 900;
+  margin-bottom: 6px;
+}
+
+.board-header p {
+  font-size: 13px;
+  color: var(--ink-light);
+  font-weight: 300;
+}
+
+.postit-compose {
+  margin-bottom: 32px;
+}
+
+.postit-pad {
+  background: var(--post-y);
+  padding: 18px 18px 14px;
+  box-shadow: 2px 3px 10px rgba(0,0,0,.12);
+  transform: rotate(-.4deg);
+}
+
+.postit-pad textarea {
+  width: 100%;
+  background: transparent;
+  border: none;
+  font-family: 'Noto Serif KR', serif;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--ink);
+  resize: none;
+  outline: none;
+  min-height: 72px;
+}
+
+.postit-pad textarea::placeholder { color: #a09060; }
+
+.postit-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.postit-foot span {
+  font-family: 'DM Mono', monospace;
+  font-size: 10.5px;
+  color: #a09060;
+}
+
+.btn-post {
+  padding: 7px 18px;
+  background: var(--ink);
+  color: white;
+  border: none;
+  font-family: 'Noto Serif KR', serif;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background .15s;
+}
+
+.btn-post:hover { background: var(--red); }
+
+.board-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
+  gap: 14px;
+}
+
+.postit-card {
+  padding: 14px;
+  font-size: 13px;
+  line-height: 1.65;
+  box-shadow: 2px 3px 8px rgba(0,0,0,.1);
+  word-break: keep-all;
+  min-height: 90px;
+}
+
+.postit-card .pmeta {
+  font-family: 'DM Mono', monospace;
+  font-size: 9.5px;
+  color: rgba(0,0,0,.3);
+  margin-bottom: 7px;
+  letter-spacing: .06em;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: .1em;
+  color: var(--ink-light);
+  cursor: pointer;
+  margin-bottom: 40px;
+  text-decoration: none;
+  transition: color .15s;
+}
+
+.back-link:hover { color: var(--ink); }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════
+     LANDING
+══════════════════════════════════════ -->
+<div id="landing" class="page active">
+  <div class="wrap">
+    <div class="land-eyebrow">Anonymous Research · 익명 리서치 · 2026</div>
+    <h1 class="land-title">서울과 지역 사이,<br><span>예술</span>하는 사람들</h1>
+    <p class="land-sub">내려간 사람, 올라온 사람, 처음부터 지역에서 산 사람 — 모두 환영합니다. 로그인 없이, 이름 없이, 솔직하게.</p>
+    <div class="anon-tag">ANONYMOUS · 완전 익명 · 로그인 불필요</div>
+
+    <div class="divider"></div>
+
+    <div class="who-label">나는 어떤 사람인가요?</div>
+    <div class="who-grid">
+      <button class="who-btn a" onclick="goSurvey('a')">
+        <span class="who-num">01</span>
+        <div class="who-text">
+          <strong>지역 토박이</strong>
+          <span>처음부터 지역에서 살았거나, 지역을 떠난 적 없는 사람</span>
+        </div>
+      </button>
+      <button class="who-btn b" onclick="goSurvey('b')">
+        <span class="who-num">02</span>
+        <div class="who-text">
+          <strong>서울 → 지역</strong>
+          <span>서울·수도권에 살다가 지역으로 내려간 사람, 또는 내려갈 생각이 있는 사람</span>
+        </div>
+      </button>
+      <button class="who-btn c" onclick="goSurvey('c')">
+        <span class="who-num">03</span>
+        <div class="who-text">
+          <strong>지역 → 서울</strong>
+          <span>지역 출신으로 서울·수도권으로 올라온 사람, 또는 왔다갔다하는 사람</span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     SURVEY A — 지역 토박이
+══════════════════════════════════════ -->
+<div id="survey-a" class="page">
+  <div class="wrap">
+    <a class="back-link" onclick="goPage('landing')">← 처음으로</a>
+    <div class="survey-header">
+      <div class="survey-kicker green">지역 토박이 · Survey A</div>
+      <h2 class="survey-title">처음부터<br>지역에서 살았다</h2>
+    </div>
+
+    <div class="progress-wrap">
+      <div class="progress-track"><div class="progress-fill green" id="prog-a" style="width:0%"></div></div>
+      <div class="progress-label" id="prog-a-label">0 / 11</div>
+    </div>
+
+    <div class="part-label">파트 1 — 나는 누구</div>
+
+    <div class="qblock accent-green" data-q="Q 01">
+      <div class="q-text">주요 활동 지역</div>
+      <div class="q-note">현재 거점</div>
+      <div class="opts" id="a-q1">
+        <button class="opt" onclick="pick(this,'a-q1','green')">경기·인천</button>
+        <button class="opt" onclick="pick(this,'a-q1','green')">강원</button>
+        <button class="opt" onclick="pick(this,'a-q1','green')">충청</button>
+        <button class="opt" onclick="pick(this,'a-q1','green')">전라</button>
+        <button class="opt" onclick="pick(this,'a-q1','green')">경상</button>
+        <button class="opt" onclick="pick(this,'a-q1','green')">제주</button>
+        <button class="opt" onclick="pick(this,'a-q1','green')">여러 곳</button>
+      </div>
+    </div>
+
+    <div class="qblock accent-green" data-q="Q 02">
+      <div class="q-text">분야</div>
+      <div class="q-note">복수 선택 가능</div>
+      <div class="opts" id="a-q2">
+        <button class="opt" onclick="pickMulti(this,'green')">음악</button>
+        <button class="opt" onclick="pickMulti(this,'green')">미술</button>
+        <button class="opt" onclick="pickMulti(this,'green')">연극·뮤지컬</button>
+        <button class="opt" onclick="pickMulti(this,'green')">무용</button>
+        <button class="opt" onclick="pickMulti(this,'green')">영상</button>
+        <button class="opt" onclick="pickMulti(this,'green')">문학</button>
+        <button class="opt" onclick="pickMulti(this,'green')">교육</button>
+        <button class="opt" onclick="pickMulti(this,'green')">음식</button>
+        <button class="opt" onclick="pickMulti(this,'green')">기타</button>
+      </div>
+    </div>
+
+    <div class="qblock accent-green" data-q="Q 03">
+      <div class="q-text">업력</div>
+      <div class="opts" id="a-q3">
+        <button class="opt" onclick="pick(this,'a-q3','green')">1년 미만</button>
+        <button class="opt" onclick="pick(this,'a-q3','green')">1~3년</button>
+        <button class="opt" onclick="pick(this,'a-q3','green')">3~7년</button>
+        <button class="opt" onclick="pick(this,'a-q3','green')">7~15년</button>
+        <button class="opt" onclick="pick(this,'a-q3','green')">15년 이상</button>
+      </div>
+    </div>
+
+    <div class="part-label">파트 2 — 왜 머물렀나</div>
+
+    <div class="qblock accent-green" data-q="Q 04">
+      <div class="q-text">지역을 떠나지 않은 이유</div>
+      <div class="opts" id="a-q4">
+        <button class="opt" onclick="pick(this,'a-q4','green')">고향이 좋아서</button>
+        <button class="opt" onclick="pick(this,'a-q4','green')">떠날 이유를 못 찾아서</button>
+        <button class="opt" onclick="pick(this,'a-q4','green')">서울이 두렵거나 낯설어서</button>
+        <button class="opt" onclick="pick(this,'a-q4','green')">지역에서 충분히 할 수 있어서</button>
+        <button class="opt" onclick="pick(this,'a-q4','green')">기타</button>
+      </div>
+    </div>
+
+    <div class="part-label">파트 3 — 지역 생활</div>
+
+    <div class="qblock accent-green" data-q="Q 05">
+      <div class="q-text">지역이라 좋은 점</div>
+      <div class="q-note">복수 선택 가능</div>
+      <div class="opts" id="a-q5">
+        <button class="opt" onclick="pickMulti(this,'green')">생활비·집값</button>
+        <button class="opt" onclick="pickMulti(this,'green')">자연·환경</button>
+        <button class="opt" onclick="pickMulti(this,'green')">환대 (지역 사람들이 반겨줬다)</button>
+        <button class="opt" onclick="pickMulti(this,'green')">지원사업·공모 접근성</button>
+        <button class="opt" onclick="pickMulti(this,'green')">경쟁이 덜하다 (블루오션)</button>
+        <button class="opt" onclick="pickMulti(this,'green')">나만의 씬을 만들 수 있다</button>
+        <button class="opt" onclick="pickMulti(this,'green')">삶의 속도</button>
+        <button class="opt" onclick="pickMulti(this,'green')">기타</button>
+      </div>
+    </div>
+
+    <div class="qblock accent-green" data-q="Q 06">
+      <div class="q-text">지역이라 힘든 점</div>
+      <div class="q-note">복수 선택 가능</div>
+      <div class="opts" id="a-q6">
+        <button class="opt" onclick="pickMulti(this,'green')">일·기회가 없다</button>
+        <button class="opt" onclick="pickMulti(this,'green')">배척 (외지인 취급)</button>
+        <button class="opt" onclick="pickMulti(this,'green')">인프라 부족</button>
+        <button class="opt" onclick="pickMulti(this,'green')">레드오션 (좁은 씬에 경쟁)</button>
+        <button class="opt" onclick="pickMulti(this,'green')">고립감·외로움</button>
+        <button class="opt" onclick="pickMulti(this,'green')">서울 네트워크에서 멀어진다</button>
+        <button class="opt" onclick="pickMulti(this,'green')">지원사업 의존도가 너무 높다</button>
+        <button class="opt" onclick="pickMulti(this,'green')">기타</button>
+      </div>
+    </div>
+
+    <div class="part-label">파트 4 — 지금 감각</div>
+
+    <div class="qblock accent-green" data-q="Q 07">
+      <div class="q-text">지역에 대해 어떻게 생각하나요?</div>
+      <div class="q-note">지금 이 순간의 솔직한 감각으로</div>
+      <div class="slider-body">
+        <input type="range" class="green" id="a-s1" min="0" max="100" value="50" oninput="updateSlider(this,'a-s1-val','불모지','기회','green')">
+        <div class="slider-ends"><span>← 불모지</span><span>기회 →</span></div>
+        <div class="slider-val green" id="a-s1-val" style="color:var(--green)">중립</div>
+      </div>
+    </div>
+
+    <div class="qblock accent-green" data-q="Q 08">
+      <div class="q-text">지금 내가 선택한 지역에서의 삶이 만족스러운가요?</div>
+      <div class="slider-body">
+        <input type="range" class="green" id="a-s2" min="0" max="100" value="50" oninput="updateSlider(this,'a-s2-val','불만족','만족','green')">
+        <div class="slider-ends"><span>← 불만족</span><span>만족 →</span></div>
+        <div class="slider-val" id="a-s2-val" style="color:var(--green)">중립</div>
+      </div>
+    </div>
+
+    <div class="qblock accent-green" data-q="Q 09">
+      <div class="q-text">앞으로 이 지역에서의 발전 가능성에 대해 어떻게 생각하나요?</div>
+      <div class="slider-body">
+        <input type="range" class="green" id="a-s3" min="0" max="100" value="50" oninput="updateSlider(this,'a-s3-val','비관적','낙관적','green')">
+        <div class="slider-ends"><span>← 비관적</span><span>낙관적 →</span></div>
+        <div class="slider-val" id="a-s3-val" style="color:var(--green)">중립</div>
+      </div>
+    </div>
+
+    <div class="qblock accent-green" data-q="Q 10">
+      <div class="q-text">지금 나의 상태</div>
+      <div class="opts" id="a-q10">
+        <button class="opt" onclick="pick(this,'a-q10','green')">지역에 살고 있다, 잘 살고 있다</button>
+        <button class="opt" onclick="pick(this,'a-q10','green')">지역에 살고 있다, 흔들리고 있다</button>
+        <button class="opt" onclick="pick(this,'a-q10','green')">서울에 살고 있다, 잘 살고 있다</button>
+        <button class="opt" onclick="pick(this,'a-q10','green')">서울에 살고 있다, 이동을 고려 중이다</button>
+        <button class="opt" onclick="pick(this,'a-q10','green')">두 곳을 오가고 있다</button>
+      </div>
+    </div>
+
+    <div class="part-label">파트 5 — 한 마디 (필수)</div>
+
+    <div class="qblock accent-green" data-q="Q 11">
+      <div class="q-text">지금 이 삶에 대해, 또는 비슷한 처지의 누군가에게 하고 싶은 말</div>
+      <div class="q-note">100자 이내 · 제출 후 포스트잇 보드에 익명 공개</div>
+      <textarea class="txt" id="a-postit" rows="3" maxlength="100" placeholder="자유롭게 써주세요" oninput="updateChar(this,'a-pc')"></textarea>
+      <div class="char-row"><span id="a-pc">0 / 100</span></div>
+    </div>
+
+    <div class="part-label">파트 6 — 더 하고 싶은 말 (선택)</div>
+    <div class="optional-intro">
+      <strong>원하는 문항만 골라 써주세요</strong>
+      <p>지역 거주 경험이 있거나 관심 있는 분께. 각 200자 이내. 모두 건너뛰어도 됩니다.</p>
+    </div>
+
+    <div class="qblock" data-q="Q 12 선택">
+      <div class="q-text">지역에서 예술가·기획자로 산다는 것은 당신에게 어떤 의미인가요?</div>
+      <textarea class="txt" rows="3" maxlength="200" placeholder="200자 이내" oninput="updateChar(this,'a-c12')"></textarea>
+      <div class="char-row"><span id="a-c12">0 / 200</span></div>
+    </div>
+    <div class="qblock" data-q="Q 13 선택">
+      <div class="q-text">왜 이 지역이 당신에게 중요한가요? 또는 왜 중요하지 않은가요?</div>
+      <textarea class="txt" rows="3" maxlength="200" placeholder="200자 이내" oninput="updateChar(this,'a-c13')"></textarea>
+      <div class="char-row"><span id="a-c13">0 / 200</span></div>
+    </div>
+    <div class="qblock" data-q="Q 14 선택">
+      <div class="q-text">지역사회에 어떤 기여를 할 수 있기를 소망하나요?</div>
+      <textarea class="txt" rows="3" maxlength="200" placeholder="200자 이내" oninput="updateChar(this,'a-c14')"></textarea>
+      <div class="char-row"><span id="a-c14">0 / 200</span></div>
+    </div>
+    <div class="qblock" data-q="Q 15 선택">
+      <div class="q-text">여기서 해보고 싶은 꿈이 있다면?</div>
+      <textarea class="txt" rows="3" maxlength="200" placeholder="200자 이내" oninput="updateChar(this,'a-c15')"></textarea>
+      <div class="char-row"><span id="a-c15">0 / 200</span></div>
+    </div>
+    <div class="qblock" data-q="Q 16 선택">
+      <div class="q-text">지역에서 계속 살 작정인가요? 그렇다면 왜, 아니라면 왜인가요?</div>
+      <textarea class="txt" rows="3" maxlength="200" placeholder="200자 이내" oninput="updateChar(this,'a-c16')"></textarea>
+      <div class="char-row"><span id="a-c16">0 / 200</span></div>
+    </div>
+    <div class="qblock" data-q="Q 17 선택">
+      <div class="q-text">지역에 미래가 있다고 생각하나요?</div>
+      <textarea class="txt" rows="3" maxlength="200" placeholder="200자 이내" oninput="updateChar(this,'a-c17')"></textarea>
+      <div class="char-row"><span id="a-c17">0 / 200</span></div>
+    </div>
+
+    <div class="submit-area">
+      <button class="btn-submit green" onclick="submitSurvey('a')">익명으로 제출하기</button>
+      <div class="submit-note">IP 수집 없음 · 로그인 없음 · 이름 없음</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     SURVEY B — 서울 → 지역
+══════════════════════════════════════ -->
+<div id="survey-b" class="page">
+  <div class="wrap">
+    <a class="back-link" onclick="goPage('landing')">← 처음으로</a>
+    <div class="survey-header">
+      <div class="survey-kicker red">서울 → 지역 · Survey B</div>
+      <h2 class="survey-title">서울을 떠나<br>지역으로 갔다</h2>
+    </div>
+
+    <div class="progress-wrap">
+      <div class="progress-track"><div class="progress-fill red" id="prog-b" style="width:0%"></div></div>
+      <div class="progress-label" id="prog-b-label">0 / 12</div>
+    </div>
+
+    <div class="part-label">파트 1 — 나는 누구</div>
+
+    <div class="qblock accent-red" data-q="Q 01">
+      <div class="q-text">고향이 어디인가요?</div>
+      <div class="opts" id="b-q1">
+        <button class="opt" onclick="pick(this,'b-q1','red')">서울·수도권</button>
+        <button class="opt" onclick="pick(this,'b-q1','red')">지역</button>
+        <button class="opt" onclick="pick(this,'b-q1','red')">여러 곳 (딱히 고향이 없다)</button>
+      </div>
+    </div>
+
+    <div class="qblock accent-red" data-q="Q 02">
+      <div class="q-text">주요 활동 지역</div>
+      <div class="opts" id="b-q2">
+        <button class="opt" onclick="pick(this,'b-q2','red')">경기·인천</button>
+        <button class="opt" onclick="pick(this,'b-q2','red')">강원</button>
+        <button class="opt" onclick="pick(this,'b-q2','red')">충청</button>
+        <button class="opt" onclick="pick(this,'b-q2','red')">전라</button>
+        <button class="opt" onclick="pick(this,'b-q2','red')">경상</button>
+        <button class="opt" onclick="pick(this,'b-q2','red')">제주</button>
+        <button class="opt" onclick="pick(this,'b-q2','red')">여러 곳</button>
+      </div>
+    </div>
+
+    <div class="qblock accent-red" data-q="Q 03">
+      <div class="q-text">분야</div>
+      <div class="q-note">복수 선택 가능</div>
+      <div class="opts" id="b-q3">
+        <button class="opt" onclick="pickMulti(this,'red')">음악</button>
+        <button class="opt" onclick="pickMulti(this,'red')">미술</button>
+        <button class="opt" onclick="pickMulti(this,'red')">연극·뮤지컬</button>
+        <button class="opt" onclick="pickMulti(this,'red')">무용</button>
+        <button class="opt" onclick="pickMulti(this,'red')">영상</button>
+        <button class="opt" onclick="pickMulti(this,'red')">문학</button>
+        <button class="opt" onclick="pickMulti(this,'red')">교육</button>
+        <button class="opt" onclick="pickMulti(this,'red')">음식</button>
+        <button class="opt" onclick="pickMulti(this,'red')">기타</button>
+      </div>
+    </div>
+
+    <div class="qblock accent-red" data-q="Q 04">
+      <div class="q-text">업력</div>
+      <div class="opts" id="b-q4">
+        <button class="opt" onclick="pick(this,'b-q4','red')">1년 미만</button>
+        <button class="opt" onclick="pick(this,'b-q4','red')">1~3년</button>
+        <button class="opt" onclick="pick(this,'b-q4','red')">3~7년</button>
+        <button class="opt" onclick="pick(this,'b-q4','red')">7~15년</button>
+        <button class="opt" onclick="pick(this,'b-q4','red')">15년 이상</button>
+      </div>
+    </div>
+
+    <div class="part-label">파트 2 — 왜 내려갔나</div>
+
+    <div class="qblock accent-red" data-q="Q 05">
+      <div class="q-text">지역으로 내려간 (내려가려는) 가장 큰 이유</div>
+      <div class="opts" id="b-q5">
+        <button class="opt" onclick="pick(this,'b-q5','red')">서울 생활비·집값 때문에</button>
+        <button class="opt" onclick="pick(this,'b-q5','red')">관계·가족 따라서</button>
+        <button class="opt" onclick="pick(this,'b-q5','red')">지역에서 가능성을 봤다</button>
+        <button class="opt" onclick="pick(this,'b-q5','red')">지쳐서 / 쉬고 싶어서</button>
+        <button class="opt" onclick="pick(this,'b-q5','red')">고향으로 돌아가고 싶어서</button>
+        <button class="opt" onclick="pick(this,'b-q5','red')">기타</button>
+      </div>
+    </div>
+
+    <div class="qblock accent-red" data-q="Q 06">
+      <div class="q-text">지역으로 내려가기 전 가장 큰 걸림돌</div>
+      <div class="opts" id="b-q6">
+        <button class="opt" onclick="pick(this,'b-q6','red')">일·수입 불안정</button>
+        <button class="opt" onclick="pick(this,'b-q6','red')">서울 네트워크·커뮤니티를 잃는 것</button>
+        <button class="opt" onclick="pick(this,'b-q6','red')">파트너·가족의 반대</button>
+        <button class="opt" onclick="pick(this,'b-q6','red')">인프라 부족</button>
+        <button class="opt" onclick="pick(this,'b-q6','red')">지역 씬이 너무 좁다</button>
+        <button class="opt" onclick="pick(this,'b-q6','red')">외지인으로 배척당할 것 같다</button>
+        <button class="opt" onclick="pick(this,'b-q6','red')">한 번 내려가면 돌아오기 어려울 것 같다</button>
+        <button class="opt" onclick="pick(this,'b-q6','red')">아직 생각 안 해봤다</button>
+        <button class="opt" onclick="pick(this,'b-q6','red')">기타</button>
+      </div>
+    </div>
+
+    <div class="part-label">파트 3 — 지역 생활</div>
+
+    <div class="qblock accent-red" data-q="Q 07">
+      <div class="q-text">지역이라 좋은 점</div>
+      <div class="q-note">복수 선택 가능</div>
+      <div class="opts" id="b-q7">
+        <button class="opt" onclick="pickMulti(this,'red')">생활비·집값</button>
+        <button class="opt" onclick="pickMulti(this,'red')">자연·환경</button>
+        <button class="opt" onclick="pickMulti(this,'red')">환대 (지역 사람들이 반겨줬다)</button>
+        <button class="opt" onclick="pickMulti(this,'red')">지원사업·공모 접근성</button>
+        <button class="opt" onclick="pickMulti(this,'red')">경쟁이 덜하다 (블루오션)</button>
+        <button class="opt" onclick="pickMulti(this,'red')">나만의 씬을 만들 수 있다</button>
+        <button class="opt" onclick="pickMulti(this,'red')">삶의 속도</button>
+        <button class="opt" onclick="pickMulti(this,'red')">기타</button>
+      </div>
+    </div>
+
+    <div class="qblock accent-red" data-q="Q 08">
+      <div class="q-text">지역이라 힘든 점</div>
+      <div class="q-note">복수 선택 가능</div>
+      <div class="opts" id="b-q8">
+        <button class="opt" onclick="pickMulti(this,'red')">일·기회가 없다</button>
+        <button class="opt" onclick="pickMulti(this,'red')">배척 (외지인 취급)</button>
+        <button class="opt" onclick="pickMulti(this,'red')">인프라 부족</button>
+        <button class="opt" onclick="pickMulti(this,'red')">레드오션 (좁은 씬에 경쟁)</button>
+        <button class="opt" onclick="pickMulti(this,'red')">고립감·외로움</button>
+        <button class="opt" onclick="pickMulti(this,'red')">서울 네트워크에서 멀어진다</button>
+        <button class="opt" onclick="pickMulti(this,'red')">지원사업 의존도가 너무 높다</button>
+        <button class="opt" onclick="pickMulti(this,'red')">기타</button>
+      </div>
+    </div>
+
+    <div class="part-label">파트 4 — 지금 감각</div>
+
+    <div class="qblock accent-red" data-q="Q 09">
+      <div class="q-text">지역에 대해 어떻게 생각하나요?</div>
+      <div class="slider-body">
+        <input type="range" class="red" id="b-s1" min="0" max="100" value="50" oninput="updateSlider(this,'b-s1-val','불모지','기회','red')">
+        <div class="slider-ends"><span>← 불모지</span><span>기회 →</span></div>
+        <div class="slider-val" id="b-s1-val" style="color:var(--red)">중립</div>
+      </div>
+    </div>
+
+    <div class="qblock accent-red" data-q="Q 10">
+      <div class="q-text">지금 내가 선택한 지역에서의 삶이 만족스러운가요?</div>
+      <div class="slider-body">
+        <input type="range" class="red" id="b-s2" min="0" max="100" value="50" oninput="updateSlider(this,'b-s2-val','불만족','만족','red')">
+        <div class="slider-ends"><span>← 불만족</span><span>만족 →</span></div>
+        <div class="slider-val" id="b-s2-val" style="color:var(--red)">중립</div>
+      </div>
+    </div>
+
+    <div class="qblock accent-red" data-q="Q 11">
+      <div class="q-text">앞으로 이 지역에서의 발전 가능성에 대해 어떻게 생각하나요?</div>
+      <div class="slider-body">
+        <input type="range" class="red" id="b-s3" min="0" max="100" value="50" oninput="updateSlider(this,'b-s3-val','비관적','낙관적','red')">
+        <div class="slider-ends"><span>← 비관적</span><span>낙관적 →</span></div>
+        <div class="slider-val" id="b-s3-val" style="color:var(--red)">중립</div>
+      </div>
+    </div>
+
+    <div class="qblock accent-red" data-q="Q 12">
+      <div class="q-text">지금 나의 상태</div>
+      <div class="opts" id="b-q12">
+        <button class="opt" onclick="pick(this,'b-q12','red')">지역에 살고 있다, 잘 살고 있다</button>
+        <button class="opt" onclick="pick(this,'b-q12','red')">지역에 살고 있다, 흔들리고 있다</button>
+        <button class="opt" onclick="pick(this,'b-q12','red')">서울에 살고 있다, 잘 살고 있다</button>
+        <button class="opt" onclick="pick(this,'b-q12','red')">서울에 살고 있다, 이동을 고려 중이다</button>
+        <button class="opt" onclick="pick(this,'b-q12','red')">두 곳을 오가고 있다</button>
+      </div>
+    </div>
+
+    <div class="part-label">파트 5 — 한 마디 (필수)</div>
+
+    <div class="qblock accent-red" data-q="Q 13">
+      <div class="q-text">지금 이 삶에 대해, 또는 비슷한 처지의 누군가에게 하고 싶은 말</div>
+      <div class="q-note">100자 이내 · 제출 후 포스트잇 보드에 익명 공개</div>
+      <textarea class="txt" id="b-postit" rows="3" maxlength="100" placeholder="자유롭게 써주세요" oninput="updateChar(this,'b-pc')"></textarea>
+      <div class="char-row"><span id="b-pc">0 / 100</span></div>
+    </div>
+
+    <div class="part-label">파트 6 — 더 하고 싶은 말 (선택)</div>
+    <div class="optional-intro">
+      <strong>원하는 문항만 골라 써주세요</strong>
+      <p>각 200자 이내. 모두 건너뛰어도 됩니다.</p>
+    </div>
+
+    <div class="qblock" data-q="Q 14 선택"><div class="q-text">지역에서 예술가·기획자로 산다는 것은 당신에게 어떤 의미인가요?</div><textarea class="txt" rows="3" maxlength="200" placeholder="200자 이내" oninput="updateChar(this,'b-c14')"></textarea><div class="char-row"><span id="b-c14">0 / 200</span></div></div>
+    <div class="qblock" data-q="Q 15 선택"><div class="q-text">왜 이 지역이 당신에게 중요한가요? 또는 왜 중요하지 않은가요?</div><textarea class="txt" rows="3" maxlength="200" placeholder="200자 이내" oninput="updateChar(this,'b-c15')"></textarea><div class="char-row"><span id="b-c15">0 / 200</span></div></div>
+    <div class="qblock" data-q="Q 16 선택"><div class="q-text">지역사회에 어떤 기여를 할 수 있기를 소망하나요?</div><textarea class="txt" rows="3" maxlength="200" placeholder="200자 이내" oninput="updateChar(this,'b-c16')"></textarea><div class="char-row"><span id="b-c16">0 / 200</span></div></div>
+    <div class="qblock" data-q="Q 17 선택"><div class="q-text">여기서 해보고 싶은 꿈이 있다면?</div><textarea class="txt" rows="3" maxlength="200" placeholder="200자 이내" oninput="updateChar(this,'b-c17')"></textarea><div class="char-row"><span id="b-c17">0 / 200</span></div></div>
+    <div class="qblock" data-q="Q 18 선택"><div class="q-text">지역에서 계속 살 작정인가요? 그렇다면 왜, 아니라면 왜인가요?</div><textarea class="txt" rows="3" maxlength="200" placeholder="200자 이내" oninput="updateChar(this,'b-c18')"></textarea><div class="char-row"><span id="b-c18">0 / 200</span></div></div>
+    <div class="qblock" data-q="Q 19 선택"><div class="q-text">지역에 미래가 있다고 생각하나요?</div><textarea class="txt" rows="3" maxlength="200" placeholder="200자 이내" oninput="updateChar(this,'b-c19')"></textarea><div class="char-row"><span id="b-c19">0 / 200</span></div></div>
+
+    <div class="submit-area">
+      <button class="btn-submit red" onclick="submitSurvey('b')">익명으로 제출하기</button>
+      <div class="submit-note">IP 수집 없음 · 로그인 없음 · 이름 없음</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     SURVEY C — 지역 → 서울
+══════════════════════════════════════ -->
+<div id="survey-c" class="page">
+  <div class="wrap">
+    <a class="back-link" onclick="goPage('landing')">← 처음으로</a>
+    <div class="survey-header">
+      <div class="survey-kicker blue">지역 → 서울 · Survey C</div>
+      <h2 class="survey-title">지역을 떠나<br>서울로 올라왔다</h2>
+    </div>
+
+    <div class="progress-wrap">
+      <div class="progress-track"><div class="progress-fill blue" id="prog-c" style="width:0%"></div></div>
+      <div class="progress-label" id="prog-c-label">0 / 11</div>
+    </div>
+
+    <div class="part-label">파트 1 — 나는 누구</div>
+
+    <div class="qblock accent-blue" data-q="Q 01">
+      <div class="q-text">고향이 어디인가요?</div>
+      <div class="opts" id="c-q1">
+        <button class="opt" onclick="pick(this,'c-q1','blue')">서울·수도권</button>
+        <button class="opt" onclick="pick(this,'c-q1','blue')">지역</button>
+        <button class="opt" onclick="pick(this,'c-q1','blue')">여러 곳 (딱히 고향이 없다)</button>
+      </div>
+    </div>
+
+    <div class="qblock accent-blue" data-q="Q 02">
+      <div class="q-text">출신 지역</div>
+      <div class="q-note">떠나온 곳 기준</div>
+      <div class="opts" id="c-q2">
+        <button class="opt" onclick="pick(this,'c-q2','blue')">경기·인천</button>
+        <button class="opt" onclick="pick(this,'c-q2','blue')">강원</button>
+        <button class="opt" onclick="pick(this,'c-q2','blue')">충청</button>
+        <button class="opt" onclick="pick(this,'c-q2','blue')">전라</button>
+        <button class="opt" onclick="pick(this,'c-q2','blue')">경상</button>
+        <button class="opt" onclick="pick(this,'c-q2','blue')">제주</button>
+        <button class="opt" onclick="pick(this,'c-q2','blue')">여러 곳</button>
+      </div>
+    </div>
+
+    <div class="qblock accent-blue" data-q="Q 03">
+      <div class="q-text">분야</div>
+      <div class="q-note">복수 선택 가능</div>
+      <div class="opts" id="c-q3">
+        <button class="opt" onclick="pickMulti(this,'blue')">음악</button>
+        <button class="opt" onclick="pickMulti(this,'blue')">미술</button>
+        <button class="opt" onclick="pickMulti(this,'blue')">연극·뮤지컬</button>
+        <button class="opt" onclick="pickMulti(this,'blue')">무용</button>
+        <button class="opt" onclick="pickMulti(this,'blue')">영상</button>
+        <button class="opt" onclick="pickMulti(this,'blue')">문학</button>
+        <button class="opt" onclick="pickMulti(this,'blue')">교육</button>
+        <button class="opt" onclick="pickMulti(this,'blue')">음식</button>
+        <button class="opt" onclick="pickMulti(this,'blue')">기타</button>
+      </div>
+    </div>
+
+    <div class="qblock accent-blue" data-q="Q 04">
+      <div class="q-text">업력</div>
+      <div class="opts" id="c-q4">
+        <button class="opt" onclick="pick(this,'c-q4','blue')">1년 미만</button>
+        <button class="opt" onclick="pick(this,'c-q4','blue')">1~3년</button>
+        <button class="opt" onclick="pick(this,'c-q4','blue')">3~7년</button>
+        <button class="opt" onclick="pick(this,'c-q4','blue')">7~15년</button>
+        <button class="opt" onclick="pick(this,'c-q4','blue')">15년 이상</button>
+      </div>
+    </div>
+
+    <div class="part-label">파트 2 — 왜 올라왔나</div>
+
+    <div class="qblock accent-blue" data-q="Q 05">
+      <div class="q-text">서울로 올라간 가장 큰 이유</div>
+      <div class="opts" id="c-q5">
+        <button class="opt" onclick="pick(this,'c-q5','blue')">일·기회를 찾아서</button>
+        <button class="opt" onclick="pick(this,'c-q5','blue')">관계·가족 따라서</button>
+        <button class="opt" onclick="pick(this,'c-q5','blue')">지역에 있을 이유가 없어서</button>
+        <button class="opt" onclick="pick(this,'c-q5','blue')">서울에서 배우고 싶어서</button>
+        <button class="opt" onclick="pick(this,'c-q5','blue')">기타</button>
+      </div>
+    </div>
+
+    <div class="qblock accent-blue" data-q="Q 06">
+      <div class="q-text">다시 지역으로 내려갈 생각이 있나요?</div>
+      <div class="opts" id="c-q6">
+        <button class="opt" onclick="pick(this,'c-q6','blue')">있다</button>
+        <button class="opt" onclick="pick(this,'c-q6','blue')">없다</button>
+        <button class="opt" onclick="pick(this,'c-q6','blue')">모르겠다</button>
+      </div>
+    </div>
+
+    <div class="part-label">파트 3 — 지금 감각</div>
+
+    <div class="qblock accent-blue" data-q="Q 07">
+      <div class="q-text">지역에 대해 어떻게 생각하나요?</div>
+      <div class="slider-body">
+        <input type="range" class="blue" id="c-s1" min="0" max="100" value="50" oninput="updateSlider(this,'c-s1-val','불모지','기회','blue')">
+        <div class="slider-ends"><span>← 불모지</span><span>기회 →</span></div>
+        <div class="slider-val" id="c-s1-val" style="color:var(--blue)">중립</div>
+      </div>
+    </div>
+
+    <div class="qblock accent-blue" data-q="Q 08">
+      <div class="q-text">지금 서울에서의 삶이 만족스러운가요?</div>
+      <div class="slider-body">
+        <input type="range" class="blue" id="c-s2" min="0" max="100" value="50" oninput="updateSlider(this,'c-s2-val','불만족','만족','blue')">
+        <div class="slider-ends"><span>← 불만족</span><span>만족 →</span></div>
+        <div class="slider-val" id="c-s2-val" style="color:var(--blue)">중립</div>
+      </div>
+    </div>
+
+    <div class="qblock accent-blue" data-q="Q 09">
+      <div class="q-text">앞으로 지역의 발전 가능성에 대해 어떻게 생각하나요?</div>
+      <div class="slider-body">
+        <input type="range" class="blue" id="c-s3" min="0" max="100" value="50" oninput="updateSlider(this,'c-s3-val','비관적','낙관적','blue')">
+        <div class="slider-ends"><span>← 비관적</span><span>낙관적 →</span></div>
+        <div class="slider-val" id="c-s3-val" style="color:var(--blue)">중립</div>
+      </div>
+    </div>
+
+    <div class="qblock accent-blue" data-q="Q 10">
+      <div class="q-text">지금 나의 상태</div>
+      <div class="opts" id="c-q10">
+        <button class="opt" onclick="pick(this,'c-q10','blue')">지역에 살고 있다, 잘 살고 있다</button>
+        <button class="opt" onclick="pick(this,'c-q10','blue')">지역에 살고 있다, 흔들리고 있다</button>
+        <button class="opt" onclick="pick(this,'c-q10','blue')">서울에 살고 있다, 잘 살고 있다</button>
+        <button class="opt" onclick="pick(this,'c-q10','blue')">서울에 살고 있다, 이동을 고려 중이다</button>
+        <button class="opt" onclick="pick(this,'c-q10','blue')">두 곳을 오가고 있다</button>
+      </div>
+    </div>
+
+    <div class="part-label">파트 5 — 한 마디 (필수)</div>
+
+    <div class="qblock accent-blue" data-q="Q 11">
+      <div class="q-text">지금 이 삶에 대해, 또는 비슷한 처지의 누군가에게 하고 싶은 말</div>
+      <div class="q-note">100자 이내 · 제출 후 포스트잇 보드에 익명 공개</div>
+      <textarea class="txt" id="c-postit" rows="3" maxlength="100" placeholder="자유롭게 써주세요" oninput="updateChar(this,'c-pc')"></textarea>
+      <div class="char-row"><span id="c-pc">0 / 100</span></div>
+    </div>
+
+    <div class="part-label">파트 6 — 더 하고 싶은 말 (선택)</div>
+    <div class="optional-intro">
+      <strong>원하는 문항만 골라 써주세요</strong>
+      <p>각 200자 이내. 모두 건너뛰어도 됩니다.</p>
+    </div>
+
+    <div class="qblock" data-q="Q 12 선택"><div class="q-text">지역에서 예술가·기획자로 산다는 것은 당신에게 어떤 의미였나요?</div><textarea class="txt" rows="3" maxlength="200" placeholder="200자 이내" oninput="updateChar(this,'c-c12')"></textarea><div class="char-row"><span id="c-c12">0 / 200</span></div></div>
+    <div class="qblock" data-q="Q 13 선택"><div class="q-text">떠나온 그 지역이 지금도 중요한가요? 왜인가요?</div><textarea class="txt" rows="3" maxlength="200" placeholder="200자 이내" oninput="updateChar(this,'c-c13')"></textarea><div class="char-row"><span id="c-c13">0 / 200</span></div></div>
+    <div class="qblock" data-q="Q 14 선택"><div class="q-text">다시 내려간다면 그 지역사회에 어떤 기여를 하고 싶은가요?</div><textarea class="txt" rows="3" maxlength="200" placeholder="200자 이내" oninput="updateChar(this,'c-c14')"></textarea><div class="char-row"><span id="c-c14">0 / 200</span></div></div>
+    <div class="qblock" data-q="Q 15 선택"><div class="q-text">지역에서 해보고 싶은 꿈이 있다면?</div><textarea class="txt" rows="3" maxlength="200" placeholder="200자 이내" oninput="updateChar(this,'c-c15')"></textarea><div class="char-row"><span id="c-c15">0 / 200</span></div></div>
+    <div class="qblock" data-q="Q 16 선택"><div class="q-text">지역에 미래가 있다고 생각하나요?</div><textarea class="txt" rows="3" maxlength="200" placeholder="200자 이내" oninput="updateChar(this,'c-c16')"></textarea><div class="char-row"><span id="c-c16">0 / 200</span></div></div>
+
+    <div class="submit-area">
+      <button class="btn-submit blue" onclick="submitSurvey('c')">익명으로 제출하기</button>
+      <div class="submit-note">IP 수집 없음 · 로그인 없음 · 이름 없음</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     DONE
+══════════════════════════════════════ -->
+<div id="done" class="page">
+  <div class="wrap">
+    <div class="done-mark">SUBMITTED · 제출 완료</div>
+    <h2 class="done-title">고맙습니다.</h2>
+    <p class="done-body">당신의 이야기가 기록됐습니다.<br>서울과 지역 사이 어딘가에서,<br>비슷한 사람들이 같은 질문을 품고 삽니다.</p>
+
+    <div class="board-header">
+      <h2>포스트잇 보드</h2>
+      <p>다른 사람들의 한 마디. 설문 없이 그냥 남겨도 됩니다.</p>
+    </div>
+
+    <div class="postit-compose">
+      <div class="postit-pad">
+        <textarea id="extra-postit" rows="3" maxlength="100" placeholder="한 마디 더 남기고 싶다면..."></textarea>
+        <div class="postit-foot">
+          <span id="extra-pc">0 / 100</span>
+          <button class="btn-post" onclick="addExtraPostit()">붙이기</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="board-grid" id="board"></div>
+  </div>
+</div>
+
+<script>
+const COLORS = ['var(--post-y)','var(--post-b)','var(--post-g)','var(--post-p)','var(--post-o)'];
+const ROTS = [-2.1, 1.4, -0.8, 2.3, -1.5, 0.9, -1.8, 1.2, -0.5, 2.0];
+
+const seeds = [
+  { text: "통영에서 3년째. 아름다운데 외롭다.", color: COLORS[0] },
+  { text: "서울은 기회가 있지만 나를 갉아먹는다.", color: COLORS[1] },
+  { text: "지역 씬도 충분히 있다. 그냥 다르다.", color: COLORS[2] },
+  { text: "올라올 때마다 내가 작아지는 기분.", color: COLORS[3] },
+  { text: "결국 사람 문제다. 어디든.", color: COLORS[4] },
+];
+
+let extraPostits = [];
+
+function goPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function goSurvey(type) {
+  goPage('survey-' + type);
+}
+
+function pick(el, groupId, color) {
+  document.querySelectorAll('#' + groupId + ' .opt').forEach(b => {
+    b.classList.remove('sel','sel-green','sel-red','sel-blue');
+  });
+  el.classList.add('sel-' + color);
+  updateProgress();
+}
+
+function pickMulti(el, color) {
+  if (el.classList.contains('sel-' + color)) {
+    el.classList.remove('sel-' + color);
+  } else {
+    el.classList.add('sel-' + color);
+  }
+}
+
+function updateSlider(el, valId, labelL, labelR, color) {
+  const v = parseInt(el.value);
+  el.style.setProperty('--pct', v + '%');
+  const labels = [labelL, labelL, '약간 ' + labelL, '중립', '약간 ' + labelR, labelR, labelR];
+  const idx = Math.round(v / 100 * (labels.length - 1));
+  const el2 = document.getElementById(valId);
+  el2.textContent = labels[idx] + ' (' + v + ')';
+}
+
+function updateChar(el, countId) {
+  document.getElementById(countId).textContent = el.value.length + ' / ' + el.maxLength;
+}
+
+function updateProgress() { /* 심플하게 유지 */ }
+
+function submitSurvey(type) {
+  const postitEl = document.getElementById(type + '-postit');
+  const text = postitEl ? postitEl.value.trim() : '';
+  if (text) {
+    extraPostits.push({ text, color: COLORS[Math.floor(Math.random() * COLORS.length)] });
+  }
+  renderBoard();
+  goPage('done');
+}
+
+function addExtraPostit() {
+  const el = document.getElementById('extra-postit');
+  const text = el.value.trim();
+  if (!text) return;
+  extraPostits.push({ text, color: COLORS[Math.floor(Math.random() * COLORS.length)] });
+  el.value = '';
+  document.getElementById('extra-pc').textContent = '0 / 100';
+  renderBoard();
+}
+
+document.getElementById('extra-postit').addEventListener('input', function() {
+  document.getElementById('extra-pc').textContent = this.value.length + ' / 100';
+});
+
+function renderBoard() {
+  const all = [...seeds, ...extraPostits];
+  document.getElementById('board').innerHTML = all.map((p, i) => `
+    <div class="postit-card" style="background:${p.color};transform:rotate(${ROTS[i % ROTS.length]}deg)">
+      <div class="pmeta">익명-${String(1000 + i).slice(1)}</div>
+      ${p.text}
+    </div>
+  `).join('');
+}
+
+renderBoard();
+</script>
+</body>
+</html>
